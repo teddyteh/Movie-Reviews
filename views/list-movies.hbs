@@ -1,0 +1,26 @@
+<link rel='stylesheet' href='/stylesheets/movies.css'/>
+<section class="add">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title pull-left">
+                Movies
+            </h3>
+            <a href="/movies/add" class="btn btn-default pull-right" role="button">Add movie</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {{# each items }}
+                    <li class="list-group-item">
+                        <a href="/movies/{{ this.title }}">{{ this.title }}</a>
+                        <div class="pull-right action-buttons">
+                            <a href="/movies/edit/{{ this.id }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="/movies/delete/{{ this.id }}" class="trash"><span
+                                    class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,143 @@
+<link rel='stylesheet' href='/stylesheets/movie.css'/>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<div class="container">
+    <div class="col-sm-12">
+        <div class="panel panel-white post panel-shadow">
+            <div class="post-heading">
+                <div class="pull-left image">
+                    <img src="{{ items.Poster }}" class="img-circle avatar"
+                         alt="user profile image">
+                </div>
+                <div class="pull-left meta">
+                    <div class="title h5">
+                        {{ items.Title }} ({{ items.Year }})
+                    </div>
+                    <h6 class="text-muted time">{{ items.Rated }} | {{ items.Runtime }} | {{ items.Genre }}
+                        | {{ items.Released }}</h6>
+                </div>
+            </div>
+            <div class="post-description">
+                <p>{{ items.Plot }}</p>
+
+                <p>Director: {{ items.Director }}</p>
+                <p>Writer: {{ items.Writer }}</p>
+                <p>Stars: {{ items.Actors }}</p>
+
+                <p>{{ items.Metascore }} Metascore</p>
+            </div>
+            <div class="post-details">
+                <h3>Details</h3>
+                <p><strong>Country</strong> {{ items.Country }}</p>
+                <p><strong>Language</strong>: {{ items.Language }}</p>
+                <p><strong>Release date</strong>: {{ items.Released }}</p>
+                <div class="stats">
+                    <a href="#" class="btn btn-default stat-item">
+                        <i class="fa fa-thumbs-up icon"></i>2
+                    </a>
+                    <a href="#" class="btn btn-default stat-item">
+                        <i class="fa fa-share icon"></i>12
+                    </a>
+                </div>
+            </div>
+            <div class="post-footer">
+                <form action="/submit" method="post">
+                    <div class="input-group">
+                        <div class="col-xs-3">
+                            <input class="form-control" name="name" placeholder="Your name">
+                        </div>
+                        <div class="col-xs-9">
+                            <input class="form-control" name="review" placeholder="Add a review">
+                        </div>
+
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="hidden" name="movie_title" value="{{ movie.title }}">
+
+                        <span class="input-group-addon">
+                            <a onclick="this.parentNode.parentNode.parentNode.submit();"><i class="fa fa-edit"></i></a>
+                        </span>
+                    </div>
+                </form>
+
+                <!--<script>-->
+                <!--$("#submit").click(function (e) {-->
+                <!--e.preventDefault();-->
+
+                <!--$.ajax({-->
+                <!--type: "POST",-->
+                <!--url: '/submit',-->
+                <!--data: {-->
+                <!--movie_id: $("#movie-id").val(),-->
+                <!--movie: $("#movie").val(),-->
+                <!--name: $("#review-name").val(),-->
+                <!--review: $("#review").val()-->
+                <!--},-->
+                <!--success: function (data) {-->
+                <!--alert("test");-->
+                <!--location.reload();-->
+                <!--}-->
+                <!--});-->
+                <!--});-->
+                <!--</script>-->
+
+                <!--{{movie.reviews}}-->
+                {{#each movie.reviews}}
+                    <ul class="comments-list">
+                        <li class="comment">
+                            <a class="pull-left" href="#">
+                                <img class="avatar" src="/images/user_1.jpg" alt="avatar">
+                            </a>
+                            <div class="comment-body">
+                                <div class="comment-heading">
+                                    <h4 class="user">{{ this.userName }}</h4>
+                                    <h5 class="time" data-toggle="collapse"
+                                        data-target="#reply-collapse-{{ this._id }}">
+                                        Reply</h5>
+                                </div>
+                                <p>{{ this.review }}</p>
+
+                                <div class="collapse" id="reply-collapse-{{ this._id }}">
+                                    <form action="/submit-reply" method="post">
+                                        <div class="input-group">
+                                            <div class="col-xs-3">
+                                                <input class="form-control" name="name" placeholder="Your name">
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <input class="form-control" name="reply" placeholder="Add a reply">
+                                            </div>
+
+                                            <input type="hidden" name="parent_review" value="{{ this._id }}">
+                                            <input type="hidden" name="movie_id" value="{{ ../movie._id }}">
+                                            <input type="hidden" name="movie_title" value="{{ ../movie.title }}">
+
+                                            <span class="input-group-addon">
+                                                <a onclick="this.parentNode.parentNode.parentNode.submit();"><i
+                                                        class="fa fa-edit"></i></a>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            {{# this.replies }}
+                                <ul class="comments-list">
+                                    <li class="comment">
+                                        <a class="pull-left" href="#">
+                                            <img class="avatar" src="/images/user_3.jpg"
+                                                 alt="avatar">
+                                        </a>
+                                        <div class="comment-body">
+                                            <div class="comment-heading">
+                                                <h4 class="user">{{ userName }}</h4>
+                                            </div>
+                                            <p>{{ reply }}</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            {{/this.replies}}
+                        </li>
+                    </ul>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<link rel='stylesheet' href='/stylesheets/index.css'/>
+
+<div class="container">
+    <div class="row">
+        {{# each items }}
+            <div class="col-xs-18 col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ this.Poster }}" alt="">
+                    <div class="caption">
+                        <h4>{{ this.Title }} ({{ this.Year }})</h4>
+                        <h6>
+                            <small>{{ this.Actors }} . {{ this.Genre }} . {{ this.Runtime }}</small>
+                        </h6>
+                        <p>{{ this.Plot }}</p>
+                        <h6>
+                            <small>iMDb: {{ this.imdbRating }}/10 . Metacritic: {{ this.Metascore }}%</small>
+                        </h6>
+                        <p>
+                            <a href="/movies/{{ this.Title }}" class="btn btn-info btn-xs" role="button">Go to movie</a>
+                            <a href="/movies/{{ this.Title }}" class="btn btn-default btn-xs" role="button">Add
+                                review</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div><!-- End row -->
+</div>

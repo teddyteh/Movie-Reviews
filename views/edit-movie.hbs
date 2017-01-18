@@ -1,0 +1,12 @@
+<section class="edit">
+    <h3>Edit movie</h3>
+    <form action="/movies/edit" method="post">
+        <div class="input-group">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="text" name="title" class="form-control" placeholder="{{ title }}">
+            <span class="input-group-btn">
+                    <button type="submit" class="btn btn-secondary">Edit movie</button>
+                </span>
+        </div>
+    </form>
+</section>
